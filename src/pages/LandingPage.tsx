@@ -126,7 +126,7 @@ const WhatsAppMockup = () => {
   ];
 
   return (
-    <div className="w-full max-w-[320px] bg-[#0b141a] rounded-[2rem] border-[8px] border-[#1f2c34] overflow-hidden shadow-2xl relative">
+    <div className="w-full max-w-[280px] sm:max-w-[320px] bg-[#0b141a] rounded-[2rem] border-[8px] border-[#1f2c34] overflow-hidden shadow-2xl relative">
       <div className="bg-[#1f2c34] p-4 flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-brand-primary flex items-center justify-center text-white font-bold">S</div>
         <div>
@@ -183,7 +183,7 @@ export default function LandingPage() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('annual');
 
   return (
-    <div className="min-h-screen bg-brand-bg text-white selection:bg-brand-cyan/30">
+    <div className="min-h-screen bg-brand-bg text-white selection:bg-brand-cyan/30 overflow-x-hidden">
       <Navbar />
 
       {/* 2. Hero Section */}
@@ -419,30 +419,33 @@ export default function LandingPage() {
 
       {/* 8. Planos */}
       <section id="planos" className="py-20 lg:py-32">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center text-nowrap">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-8">Escolha o plano ideal para o seu negócio.</h2>
           
           {/* Billing Toggle */}
-          <div className="flex items-center justify-center gap-4 mb-16">
-            <span className={`text-sm font-medium ${billingCycle === 'monthly' ? 'text-white' : 'text-gray-500'}`}>Mensal</span>
-            <button 
-              onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
-              className="w-14 h-7 bg-brand-deep rounded-full p-1 relative border border-brand-cyan/30 transition-colors"
-            >
-              <motion.div 
-                animate={{ x: billingCycle === 'monthly' ? 0 : 28 }}
-                className="w-5 h-5 bg-brand-cyan rounded-full shadow-cyan-glow"
-              />
-            </button>
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <div className="flex items-center gap-4">
+              <span className={`text-sm font-medium ${billingCycle === 'monthly' ? 'text-white' : 'text-gray-500'}`}>Mensal</span>
+              <button 
+                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
+                className="w-14 h-7 bg-brand-deep rounded-full p-1 relative border border-brand-cyan/30 transition-colors"
+                aria-label="Toggle billing cycle"
+              >
+                <motion.div 
+                  animate={{ x: billingCycle === 'monthly' ? 0 : 28 }}
+                  className="w-5 h-5 bg-brand-cyan rounded-full shadow-cyan-glow"
+                />
+              </button>
               <span className={`text-sm font-medium ${billingCycle === 'annual' ? 'text-white' : 'text-gray-500'}`}>Anual</span>
-              <span className="bg-brand-cyan/20 text-brand-cyan text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand-cyan/30">ECONOMIZE R$ 600/ANO</span>
             </div>
+            <span className="bg-brand-cyan/20 text-brand-cyan text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand-cyan/30">
+              ECONOMIZE R$ 600/ANO
+            </span>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Free Plan */}
-            <div className="p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all text-nowrap">
+            <div className="p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
               <h3 className="text-2xl font-bold mb-2">Teste Grátis</h3>
               <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">Experimente o poder da Sofia por 15 dias.</p>
               <div className="text-4xl font-bold mb-8">Grátis<span className="text-lg text-gray-500">/15 dias</span></div>
@@ -466,7 +469,7 @@ export default function LandingPage() {
             </div>
 
             {/* Starter Plan */}
-            <div className="p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-brand-primary/20 transition-all text-nowrap">
+            <div className="p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-brand-primary/20 transition-all">
               <h3 className="text-2xl font-bold mb-2">Plano Inicial</h3>
               <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">Ideal para quem está começando.</p>
               <div className="text-4xl font-bold mb-8">
@@ -493,7 +496,7 @@ export default function LandingPage() {
             </div>
 
             {/* Pro Plan */}
-            <div className="p-8 rounded-3xl border-2 border-brand-cyan bg-brand-primary/10 text-left relative flex flex-col overflow-hidden shadow-cyan-glow transition-all hover:scale-[1.02] text-nowrap">
+            <div className="p-8 rounded-3xl border-2 border-brand-cyan bg-brand-primary/10 text-left relative flex flex-col overflow-hidden shadow-cyan-glow transition-all hover:scale-[1.02]">
               <div className="absolute top-4 right-4 bg-brand-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Mais Popular</div>
               <h3 className="text-2xl font-bold mb-2">Plano Profissional</h3>
               <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">A Sofia em sua potência máxima.</p>
@@ -554,7 +557,7 @@ export default function LandingPage() {
             <p className="text-gray-500 max-w-xs">Inteligência artificial aplicada ao atendimento que gera resultados reais.</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-20">
             {[
               { title: "Empresa", links: [{name: "Sobre", href: "#"}, {name: "Carreiras", href: "#"}, {name: "Blog", href: "#"}] },
               { title: "Suporte", links: [{name: "Ajuda", href: "#"}, {name: "WhatsApp", href: getWAUrl("Olá! Preciso de ajuda com a Sofia.")}, {name: "Status", href: "#"}] },
