@@ -295,7 +295,7 @@ export default function LandingPage() {
       </SectionWrapper>
 
       {/* 4. O que é a Sofia */}
-      <section className="py-20 bg-brand-deep/30 overflow-hidden">
+      <section id="sobre" className="py-20 bg-brand-deep/30 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="order-2 lg:order-1 relative group">
              <div className="absolute -inset-10 bg-brand-primary/10 rounded-full blur-3xl group-hover:bg-brand-primary/20 transition-all duration-700" />
@@ -525,6 +525,53 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-20 bg-brand-deep/20 border-t border-white/5">
+        <div className="max-w-4xl mx-auto px-4 md:px-8">
+          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">Perguntas Frequentes</h2>
+          <div className="space-y-4">
+            {[
+              {
+                q: "Como a Sofia aprende sobre o meu negócio?",
+                a: "É muito simples! Você fornece manuais, links do seu site ou documentos com informações sobre seus produtos e serviços. A Sofia processa esses dados e começa a responder exatamente como você faria, mantendo o tom de voz da sua marca."
+              },
+              {
+                q: "Ela consegue responder mensagens de áudio?",
+                a: "Sim! No Plano Profissional, a Sofia não apenas entende áudios enviados pelos clientes, mas também pode responder com áudios gerados por IA, tornando o atendimento ainda mais humano e acessível."
+              },
+              {
+                q: "Preciso deixar meu celular ligado 24h?",
+                a: "Não. A Sofia funciona de forma independente em nossos servidores. Uma vez conectada ao seu WhatsApp Business, ela opera 24h por dia, 7 dias por semana, mesmo que seu celular esteja desligado ou sem internet."
+              },
+              {
+                q: "A Sofia pode agendar reuniões ou consultas?",
+                a: "Com certeza. Ela se integra com sistemas de calendário e pode verificar sua disponibilidade em tempo real para agendar reuniões, consultas ou visitas, enviando a confirmação direto para o cliente."
+              },
+              {
+                q: "O que acontece se ela não souber responder algo?",
+                a: "Nesses casos, a Sofia é preparada para ser honesta e oferecer passar o atendimento para um atendente humano. Você recebe uma notificação e pode assumir a conversa pelo painel a qualquer momento."
+              },
+              {
+                q: "É seguro? Meus dados e dos meus clientes estarão protegidos?",
+                a: "Segurança é nossa prioridade. Estamos em total conformidade com a LGPD. Todas as conversas são criptografadas e os dados são usados exclusivamente para o treinamento da sua própria assistente, nunca compartilhados com terceiros."
+              }
+            ].map((faq, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="p-6 rounded-2xl bg-brand-bg border border-white/5 hover:border-brand-cyan/30 transition-all group"
+              >
+                <h3 className="text-lg font-bold mb-3 text-white group-hover:text-brand-cyan transition-colors">{faq.q}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{faq.a}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 9. CTA Final */}
       <section className="py-20 lg:py-32 px-4 md:px-8 overflow-hidden">
         <div className="max-w-5xl mx-auto rounded-[2rem] md:rounded-[3rem] p-10 md:p-20 bg-gradient-to-br from-brand-primary to-brand-bg border border-brand-cyan/20 text-center relative overflow-hidden shadow-purple-glow">
@@ -559,8 +606,8 @@ export default function LandingPage() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-20">
             {[
-              { title: "Empresa", links: [{name: "Sobre", href: "#"}, {name: "Carreiras", href: "#"}, {name: "Blog", href: "#"}] },
-              { title: "Suporte", links: [{name: "Ajuda", href: "#"}, {name: "WhatsApp", href: getWAUrl("Olá! Preciso de ajuda com a Sofia.")}, {name: "Status", href: "#"}] },
+              { title: "Empresa", links: [{name: "Sobre", href: "#sobre"}] },
+              { title: "Suporte", links: [{name: "Ajuda", href: "#"}, {name: "WhatsApp", href: getWAUrl("Olá! Preciso de ajuda com a Sofia.")}] },
               { title: "Legal", links: [{name: "Privacidade", href: "/privacidade"}, {name: "Termos", href: "/termos-de-uso"}, {name: "LGPD", href: "/lgpd"}] }
             ].map((col, i) => (
               <div key={i}>
