@@ -22,6 +22,10 @@ import { useState, useEffect, useRef } from "react";
 
 // --- Components ---
 
+const WHATSAPP_NUMBER = "5532984963439";
+
+const getWAUrl = (text: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,9 +66,14 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <button className="bg-brand-primary hover:bg-brand-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-transform hover:scale-105 shadow-cyan-glow border border-brand-cyan/30">
+          <a 
+            href={getWAUrl("Olá! Gostaria de saber mais sobre como a Sofia pode ajudar minha empresa.")}
+            target="_blank"
+            rel="noreferrer"
+            className="bg-brand-primary hover:bg-brand-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-transform hover:scale-105 shadow-cyan-glow border border-brand-cyan/30"
+          >
             Começar agora
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -85,7 +94,7 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -20 }}
             className="md:hidden absolute top-full left-0 right-0 bg-brand-deep border-b border-brand-cyan/20 p-4"
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 text-center">
               {navLinks.map((link) => (
                 <a 
                   key={link.name} 
@@ -96,9 +105,14 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <button className="bg-brand-primary text-white px-6 py-3 rounded-full font-semibold glow-cyan">
+              <a 
+                href={getWAUrl("Olá! Gostaria de começar agora com a Sofia.")}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-brand-primary text-white px-6 py-3 rounded-full font-semibold glow-cyan"
+              >
                 Começar agora
-              </button>
+              </a>
             </div>
           </motion.div>
         )}
@@ -170,6 +184,8 @@ const SectionWrapper = ({ children, id, className = "" }: { children: React.Reac
 );
 
 export default function App() {
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('annual');
+
   return (
     <div className="min-h-screen bg-brand-bg text-white selection:bg-brand-cyan/30">
       <Navbar />
@@ -200,26 +216,36 @@ export default function App() {
           ))}
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center lg:text-left"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gradient">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gradient px-4 md:px-0">
               A inteligência que seu WhatsApp precisava para vender 24h por dia.
             </h1>
-            <p className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed mx-auto lg:mx-0">
+            <p className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed mx-auto lg:mx-0 px-6 md:px-0">
               Sofia é sua nova funcionária digital. Ela aprende sobre seu negócio, atende com naturalidade e garante que nenhum lead fique sem resposta, 24h por dia.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <button className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-purple-glow flex items-center gap-2 border border-brand-cyan/30">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start px-8 sm:px-0">
+              <a 
+                href={getWAUrl("Olá! Quero a Sofia atendendo meus clientes 24h por dia e vendendo mais.")}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-purple-glow flex items-center justify-center gap-2 border border-brand-cyan/30"
+              >
                 Começar agora <ArrowRight className="w-5 h-5" />
-              </button>
-              <button className="border border-brand-cyan text-brand-cyan hover:bg-brand-cyan/10 px-8 py-4 rounded-xl font-bold text-lg transition-all">
+              </a>
+              <a 
+                href="https://agenteia.natandesouza.com.br/assistente"
+                target="_blank"
+                rel="noreferrer"
+                className="border border-brand-cyan text-brand-cyan hover:bg-brand-cyan/10 px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center"
+              >
                 Ver como funciona
-              </button>
+              </a>
             </div>
           </motion.div>
 
@@ -227,11 +253,11 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative flex justify-center lg:justify-end pr-4 md:pr-12"
+            className="relative flex justify-center lg:justify-end pr-0 md:pr-12"
           >
-            <div className="relative group max-w-sm w-full">
+            <div className="relative group max-w-sm w-full mx-auto md:mx-0">
               <div className="absolute -inset-10 bg-brand-cyan/10 rounded-full blur-3xl group-hover:bg-brand-cyan/20 transition-all duration-700 opacity-50" />
-              <div className="relative z-10 transform -rotate-1 hover:rotate-0 transition-transform duration-500">
+              <div className="relative z-10 transform -rotate-1 hover:rotate-0 transition-transform duration-500 scale-90 sm:scale-100">
                 <WhatsAppMockup />
               </div>
             </div>
@@ -274,18 +300,22 @@ export default function App() {
       </SectionWrapper>
 
       {/* 4. O que é a Sofia */}
-      <section className="py-20 bg-brand-deep/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1 relative">
-             <div className="absolute -inset-10 bg-brand-primary/20 rounded-full blur-3xl" />
-             <div className="relative rounded-3xl overflow-hidden border border-brand-primary/30 glow-purple">
+      <section className="py-20 bg-brand-deep/30 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="order-2 lg:order-1 relative group">
+             <div className="absolute -inset-10 bg-brand-primary/10 rounded-full blur-3xl group-hover:bg-brand-primary/20 transition-all duration-700" />
+             <motion.div 
+               whileHover={{ scale: 1.02 }}
+               transition={{ duration: 0.5 }}
+               className="relative rounded-3xl overflow-hidden border border-brand-primary/20 glow-purple shadow-2xl"
+             >
                <img 
-                 src="https://images.unsplash.com/photo-1620712943543-bcc4628c7190?q=80&w=1000&auto=format&fit=crop" 
-                 alt="IA Sophistication" 
-                 className="w-full aspect-video object-cover"
+                 src="/sofia2.png" 
+                 alt="Sofia Digital Employee Illustration" 
+                 className="w-full h-auto object-contain max-h-[600px] block"
                  referrerPolicy="no-referrer"
                />
-             </div>
+             </motion.div>
           </div>
           <div className="order-1 lg:order-2">
             <h2 className="text-3xl md:text-5xl font-bold mb-8">Sofia não é um chatbot. É uma funcionária.</h2>
@@ -393,63 +423,129 @@ export default function App() {
       </SectionWrapper>
 
       {/* 8. Planos */}
-      <section id="planos" className="py-20">
-        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-16">Escolha o plano ideal para o seu negócio.</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Starter Plan */}
-            <div className="p-10 rounded-3xl border border-white/10 bg-brand-deep/20 text-left">
-              <h3 className="text-2xl font-bold mb-2">Plano Inicial</h3>
-              <p className="text-gray-400 mb-6 font-medium">Ideal para quem está começando.</p>
-              <div className="text-4xl font-bold mb-8">R$ 297<span className="text-lg text-gray-500">/mês</span></div>
-              <ul className="space-y-4 mb-10 text-gray-300">
-                <li className="flex items-center gap-3"><Check className="w-5 h-5 text-brand-cyan" /> 500 diálogos/mês</li>
-                <li className="flex items-center gap-3"><Check className="w-5 h-5 text-brand-cyan" /> Treinamento básico</li>
-                <li className="flex items-center gap-3"><Check className="w-5 h-5 text-brand-cyan" /> Painel de controle</li>
-                <li className="flex items-center gap-3 text-gray-600"><X className="w-5 h-5" /> Atendimento por áudio</li>
+      <section id="planos" className="py-20 lg:py-32">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center text-nowrap">
+          <h2 className="text-3xl md:text-5xl font-bold mb-8">Escolha o plano ideal para o seu negócio.</h2>
+          
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-4 mb-16">
+            <span className={`text-sm font-medium ${billingCycle === 'monthly' ? 'text-white' : 'text-gray-500'}`}>Mensal</span>
+            <button 
+              onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
+              className="w-14 h-7 bg-brand-deep rounded-full p-1 relative border border-brand-cyan/30 transition-colors"
+            >
+              <motion.div 
+                animate={{ x: billingCycle === 'monthly' ? 0 : 28 }}
+                className="w-5 h-5 bg-brand-cyan rounded-full shadow-cyan-glow"
+              />
+            </button>
+            <div className="flex items-center gap-2">
+              <span className={`text-sm font-medium ${billingCycle === 'annual' ? 'text-white' : 'text-gray-500'}`}>Anual</span>
+              <span className="bg-brand-cyan/20 text-brand-cyan text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand-cyan/30">ECONOMIZE R$ 600/ANO</span>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Free Plan */}
+            <div className="p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
+              <h3 className="text-2xl font-bold mb-2">Teste Grátis</h3>
+              <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">Experimente o poder da Sofia por 15 dias.</p>
+              <div className="text-4xl font-bold mb-8">Grátis<span className="text-lg text-gray-500">/15 dias</span></div>
+              <ul className="space-y-4 mb-10 text-gray-300 flex-1">
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> 100 contatos/período</li>
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Painel de controle</li>
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Treinamento do agente (Texto)</li>
+                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Treinamento por áudio</li>
+                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> 1 número de telefone grátis</li>
+                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Sistema de Agendamento</li>
+                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Integração CRM</li>
               </ul>
-              <button className="w-full py-4 border border-brand-cyan text-brand-cyan rounded-xl font-bold hover:bg-brand-cyan/10 transition-all">
+              <a 
+                href={getWAUrl("Olá! Gostaria de iniciar meu teste grátis de 15 dias da Sofia.")}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-4 border border-white/20 text-gray-400 rounded-xl font-bold hover:bg-white/5 transition-all text-center"
+              >
+                Começar Teste
+              </a>
+            </div>
+
+            {/* Starter Plan */}
+            <div className="p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-brand-primary/20 transition-all">
+              <h3 className="text-2xl font-bold mb-2">Plano Inicial</h3>
+              <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">Ideal para quem está começando.</p>
+              <div className="text-4xl font-bold mb-8">
+                R$ {billingCycle === 'annual' ? '247,90' : '297,90'}
+                <span className="text-lg text-gray-500">/mês</span>
+              </div>
+              <ul className="space-y-4 mb-10 text-gray-300 flex-1">
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> 500 diálogos/mês</li>
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Treinamento do agente (Texto)</li>
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Painel de controle</li>
+                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Treinamento por áudio</li>
+                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> 1 número de telefone grátis</li>
+                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Sistema de Agendamento</li>
+                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Integração CRM</li>
+              </ul>
+              <a 
+                href={getWAUrl(`Olá! Gostaria de assinar o Plano Inicial da Sofia (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}).`)}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-4 border border-brand-cyan text-brand-cyan rounded-xl font-bold hover:bg-brand-cyan/10 transition-all text-center"
+              >
                 Assinar Plano
-              </button>
+              </a>
             </div>
 
             {/* Pro Plan */}
-            <div className="p-10 rounded-3xl border-2 border-brand-cyan bg-brand-primary/10 text-left relative overflow-hidden">
+            <div className="p-8 rounded-3xl border-2 border-brand-cyan bg-brand-primary/10 text-left relative flex flex-col overflow-hidden shadow-cyan-glow transition-all hover:scale-[1.02]">
               <div className="absolute top-4 right-4 bg-brand-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Mais Popular</div>
               <h3 className="text-2xl font-bold mb-2">Plano Profissional</h3>
-              <p className="text-gray-400 mb-6 font-medium">A Sofia em sua potência máxima.</p>
-              <div className="text-4xl font-bold mb-8">R$ 497<span className="text-lg text-gray-500">/mês</span></div>
-              <ul className="space-y-4 mb-10 text-gray-300">
-                <li className="flex items-center gap-3 font-bold text-white"><Check className="w-5 h-5 text-brand-cyan" /> Diálogos ilimitados</li>
-                <li className="flex items-center gap-3"><Check className="w-5 h-5 text-brand-cyan" /> Treinamento avançado</li>
-                <li className="flex items-center gap-3"><Check className="w-5 h-5 text-brand-cyan" /> Atendimento por áudio</li>
-                <li className="flex items-center gap-3"><Check className="w-5 h-5 text-brand-cyan" /> Integração CRM</li>
+              <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">A Sofia em sua potência máxima.</p>
+              <div className="text-4xl font-bold mb-8">
+                R$ {billingCycle === 'annual' ? '447,90' : '497,90'}
+                <span className="text-lg text-gray-500">/mês</span>
+              </div>
+              <ul className="space-y-4 mb-10 text-gray-300 flex-1">
+                <li className="flex items-center gap-3 font-bold text-white text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Diálogos ilimitados</li>
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> 1 número de telefone grátis</li>
+                <li className="flex items-center gap-3 text-sm font-semibold text-brand-cyan"><Check className="w-4 h-4" /> Treinamento do agente (Áudio/Texto)</li>
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Sistema de Agendamento</li>
+                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Integração CRM</li>
               </ul>
-              <button className="w-full py-4 bg-brand-cyan text-brand-bg rounded-xl font-bold glow-cyan transition-all">
+              <a 
+                href={getWAUrl(`Olá! Gostaria de assinar o Plano Profissional da Sofia (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}).`)}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-4 bg-brand-cyan text-brand-bg rounded-xl font-bold transition-all hover:brightness-110 text-center"
+              >
                 Quero este plano
-              </button>
+              </a>
             </div>
           </div>
-          <p className="mt-8 text-gray-500">Sem fidelidade. Cancele quando quiser.</p>
+          <p className="mt-8 text-gray-500 italic">Sem fidelidade. Cancele quando quiser.</p>
         </div>
       </section>
 
       {/* 9. CTA Final */}
-      <section className="py-24 px-4 md:px-8">
-        <div className="max-w-5xl mx-auto rounded-[3rem] p-12 md:p-20 bg-gradient-to-br from-brand-primary to-brand-bg border border-brand-cyan/30 text-center relative overflow-hidden">
+      <section className="py-20 lg:py-32 px-4 md:px-8 overflow-hidden">
+        <div className="max-w-5xl mx-auto rounded-[2rem] md:rounded-[3rem] p-10 md:p-20 bg-gradient-to-br from-brand-primary to-brand-bg border border-brand-cyan/20 text-center relative overflow-hidden shadow-purple-glow">
           {/* Background circles */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl" />
           
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 relative z-10 leading-tight">Pronto para ter a Sofia na sua equipe?</h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto relative z-10">Configure em menos de 15 minutos e comece a atender seus clientes hoje mesmo.</p>
-          <motion.button 
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 relative z-10 leading-tight px-2">Pronto para ter a Sofia na sua equipe?</h2>
+          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto relative z-10 px-4">Configure em menos de 15 minutos e comece a atender seus clientes hoje mesmo.</p>
+          <motion.a 
+            href={getWAUrl("Olá! Quero começar agora com a Sofia e vender mais pelo WhatsApp!")}
+            target="_blank"
+            rel="noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-12 py-6 bg-brand-cyan text-brand-bg rounded-full text-xl font-black glow-cyan uppercase tracking-wide relative z-10"
+            className="inline-block px-10 md:px-16 py-5 md:py-7 bg-brand-cyan text-brand-bg rounded-full text-lg md:text-2xl font-black shadow-cyan-glow uppercase tracking-wide relative z-10 transition-transform"
           >
             Começar Grátis Agora
-          </motion.button>
+          </motion.a>
         </div>
       </section>
 
