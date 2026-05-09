@@ -419,109 +419,122 @@ export default function LandingPage() {
 
       {/* 8. Planos */}
       <section id="planos" className="py-20 lg:py-32">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-8">Escolha o plano ideal para o seu negócio.</h2>
           
-          {/* Billing Toggle */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <div className="flex items-center gap-4">
-              <span className={`text-sm font-medium ${billingCycle === 'monthly' ? 'text-white' : 'text-gray-500'}`}>Mensal</span>
-              <button 
-                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
-                className="w-14 h-7 bg-brand-deep rounded-full p-1 relative border border-brand-cyan/30 transition-colors"
-                aria-label="Toggle billing cycle"
-              >
-                <motion.div 
-                  animate={{ x: billingCycle === 'monthly' ? 0 : 28 }}
-                  className="w-5 h-5 bg-brand-cyan rounded-full shadow-cyan-glow"
-                />
-              </button>
-              <span className={`text-sm font-medium ${billingCycle === 'annual' ? 'text-white' : 'text-gray-500'}`}>Anual</span>
+          {/* Billing Toggle - Now showing monthly by default for these specific prices */}
+          <div className="flex items-center justify-center gap-4 mb-16">
+            <span className="text-sm font-medium text-white">Mensal</span>
+            <div className="w-14 h-7 bg-brand-deep rounded-full p-1 relative border border-brand-cyan/30">
+              <div className="w-5 h-5 bg-brand-cyan rounded-full shadow-cyan-glow" />
             </div>
-            <span className="bg-brand-cyan/20 text-brand-cyan text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand-cyan/30">
-              ECONOMIZE R$ 600/ANO
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-gray-500">Anual</span>
+              <span className="bg-brand-cyan/20 text-brand-cyan text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand-cyan/30">
+                PROMOÇÃO ATIVA
+              </span>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Free Plan */}
-            <div className="p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
-              <h3 className="text-2xl font-bold mb-2">Teste Grátis</h3>
-              <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">Experimente o poder da Sofia por 15 dias.</p>
-              <div className="text-4xl font-bold mb-8">Grátis<span className="text-lg text-gray-500">/15 dias</span></div>
-              <ul className="space-y-4 mb-10 text-gray-300 flex-1">
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> 100 contatos/período</li>
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Painel de controle</li>
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Treinamento do agente (Texto)</li>
-                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Treinamento por áudio</li>
-                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> 1 número de telefone grátis</li>
-                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Sistema de Agendamento</li>
-                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Integração CRM</li>
-              </ul>
-              <a 
-                href={getWAUrl("Olá! Gostaria de iniciar meu teste grátis de 15 dias da Sofia.")}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full py-4 border border-white/20 text-gray-400 rounded-xl font-bold hover:bg-white/5 transition-all text-center"
-              >
-                Começar Teste
-              </a>
-            </div>
-
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 overflow-x-auto pb-4 md:pb-0">
             {/* Starter Plan */}
-            <div className="p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-brand-primary/20 transition-all">
-              <h3 className="text-2xl font-bold mb-2">Plano Inicial</h3>
-              <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">Ideal para quem está começando.</p>
-              <div className="text-4xl font-bold mb-8">
-                R$ {billingCycle === 'annual' ? '247,90' : '297,90'}
-                <span className="text-lg text-gray-500">/mês</span>
+            <div className="min-w-[300px] p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
+              <h3 className="text-2xl font-bold mb-1">Starter</h3>
+              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Microempreendedor</p>
+              <div className="text-4xl font-bold mb-8">R$ 29,90<span className="text-lg text-gray-500 font-normal">/mês</span></div>
+              
+              <div className="space-y-4 mb-10 flex-1">
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Dashboard & Relatórios</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Contatos/CRM</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Agentes de IA</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Agendamentos/Calendário</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Campanhas/Broadcast</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Modelos Avançados (o1)</span></div>
+                <div className="pt-2 border-t border-white/5">
+                  <div className="flex items-center gap-3 text-sm font-medium text-gray-500">
+                    <X className="w-4 h-4 text-red-500/50" /> 
+                    <span>IA Sofia <span className="text-[10px] bg-white/5 px-1.5 py-0.5 rounded ml-1 text-gray-400">15 dias teste</span></span>
+                  </div>
+                </div>
               </div>
-              <ul className="space-y-4 mb-10 text-gray-300 flex-1">
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> 500 diálogos/mês</li>
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Treinamento do agente (Texto)</li>
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Painel de controle</li>
-                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Treinamento por áudio</li>
-                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> 1 número de telefone grátis</li>
-                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Sistema de Agendamento</li>
-                <li className="flex items-center gap-3 text-sm text-gray-600"><X className="w-4 h-4" /> Integração CRM</li>
-              </ul>
+              
               <a 
-                href={getWAUrl(`Olá! Gostaria de assinar o Plano Inicial da Sofia (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}).`)}
+                href={getWAUrl("Olá! Gostaria de assinar o Plano Starter de R$ 29,90 da Sofia.")}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-4 border border-brand-cyan text-brand-cyan rounded-xl font-bold hover:bg-brand-cyan/10 transition-all text-center"
+                className="w-full py-4 border border-white/20 text-white rounded-xl font-bold hover:bg-white/5 transition-all text-center"
               >
-                Assinar Plano
+                Assinar Starter
               </a>
             </div>
 
             {/* Pro Plan */}
-            <div className="p-8 rounded-3xl border-2 border-brand-cyan bg-brand-primary/10 text-left relative flex flex-col overflow-hidden shadow-cyan-glow transition-all hover:scale-[1.02]">
-              <div className="absolute top-4 right-4 bg-brand-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Mais Popular</div>
-              <h3 className="text-2xl font-bold mb-2">Plano Profissional</h3>
-              <p className="text-gray-400 mb-6 font-medium text-sm whitespace-normal">A Sofia em sua potência máxima.</p>
-              <div className="text-4xl font-bold mb-8">
-                R$ {billingCycle === 'annual' ? '447,90' : '497,90'}
-                <span className="text-lg text-gray-500">/mês</span>
+            <div className="min-w-[300px] p-8 rounded-3xl border-2 border-brand-cyan/30 bg-brand-primary/5 text-left flex flex-col relative transition-all hover:scale-[1.02] shadow-cyan-glow">
+              <div className="absolute top-4 right-4 bg-brand-cyan text-brand-bg px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Recomendado</div>
+              <h3 className="text-2xl font-bold mb-1">Pro</h3>
+              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Pequenos Negócios</p>
+              <div className="text-4xl font-bold mb-8">R$ 147,00*<span className="text-lg text-gray-500 font-normal">/mês</span></div>
+              
+              <div className="space-y-4 mb-10 flex-1">
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Dashboard & Relatórios</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Contatos/CRM</span></div>
+                <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Até 3 Agentes de IA</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Agendamentos/Calendário</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Campanhas/Broadcast</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Modelos Avançados (o1)</span></div>
+                <div className="pt-2 border-t border-brand-cyan/20">
+                  <div className="flex items-center gap-3 text-sm font-medium text-gray-500">
+                    <X className="w-4 h-4 text-red-500/50" /> 
+                    <span>IA Sofia <span className="text-[10px] bg-white/5 px-1.5 py-0.5 rounded ml-1 text-gray-400">15 dias teste</span></span>
+                  </div>
+                </div>
               </div>
-              <ul className="space-y-4 mb-10 text-gray-300 flex-1">
-                <li className="flex items-center gap-3 font-bold text-white text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Diálogos ilimitados</li>
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> 1 número de telefone grátis</li>
-                <li className="flex items-center gap-3 text-sm font-semibold text-brand-cyan"><Check className="w-4 h-4" /> Treinamento do agente (Áudio/Texto)</li>
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Sistema de Agendamento</li>
-                <li className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-brand-cyan" /> Integração CRM</li>
-              </ul>
+              
               <a 
-                href={getWAUrl(`Olá! Gostaria de assinar o Plano Profissional da Sofia (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}).`)}
+                href={getWAUrl("Olá! Gostaria de assinar o Plano Pro de R$ 147,00 da Sofia.")}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-4 bg-brand-cyan text-brand-bg rounded-xl font-bold transition-all hover:brightness-110 text-center"
+                className="w-full py-4 bg-brand-cyan text-brand-bg rounded-xl font-bold hover:brightness-110 transition-all text-center"
               >
-                Quero este plano
+                Quero o Pro
+              </a>
+            </div>
+
+            {/* Elite Plan */}
+            <div className="min-w-[300px] p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
+              <h3 className="text-2xl font-bold mb-1">Elite</h3>
+              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Escala e Marketing</p>
+              <div className="text-4xl font-bold mb-8">R$ 297,00*<span className="text-lg text-gray-500 font-normal">/mês</span></div>
+              
+              <div className="space-y-4 mb-10 flex-1">
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Dashboard & Relatórios</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Contatos/CRM</span></div>
+                <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Agentes Ilimitados</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Agendamentos/Calendário</span></div>
+                <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Campanhas/Broadcast</span></div>
+                <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Modelos Avançados (o1)</span></div>
+                <div className="pt-2 border-t border-white/5">
+                  <div className="flex items-center gap-3 text-sm font-black text-white">
+                    <Check className="w-4 h-4 text-green-500" /> 
+                    <span>IA Sofia: <span className="text-brand-cyan">Total + Automação</span></span>
+                  </div>
+                </div>
+              </div>
+              
+              <a 
+                href={getWAUrl("Olá! Gostaria de assinar o Plano Elite de R$ 297,00 da Sofia.")}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-4 border border-brand-cyan text-brand-cyan rounded-xl font-bold hover:bg-brand-cyan/10 transition-all text-center"
+              >
+                Assinar Elite
               </a>
             </div>
           </div>
-          <p className="mt-8 text-gray-500 italic">Sem fidelidade. Cancele quando quiser.</p>
+          <p className="mt-8 text-gray-500 text-sm">* Valore referente ao setup + mensalidade conforme volume.</p>
         </div>
       </section>
 
