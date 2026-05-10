@@ -11,12 +11,56 @@ import {
   X, 
   ArrowRight,
   ShieldCheck,
-  Star
+  Star,
+  ChevronDown
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // --- Components ---
+
+const FAQItem: React.FC<{ q: string; a: string; index: number }> = ({ q, a, index }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="rounded-2xl bg-brand-bg border border-white/5 overflow-hidden hover:border-brand-cyan/30 transition-all"
+    >
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full p-6 text-left flex justify-between items-center gap-4 group"
+      >
+        <h3 className={`text-lg font-bold transition-colors ${isOpen ? 'text-brand-cyan' : 'text-white'}`}>{q}</h3>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className={`shrink-0 ${isOpen ? 'text-brand-cyan' : 'text-gray-500'}`}
+        >
+          <ChevronDown className="w-5 h-5" />
+        </motion.div>
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="px-6 pb-6 pt-0 border-t border-white/5">
+              <p className="text-gray-400 text-sm leading-relaxed mt-4">{a}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 const WHATSAPP_NUMBER = "5532984963439";
 
@@ -422,26 +466,40 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-8">Escolha o plano ideal para o seu negócio.</h2>
           
-          {/* Billing Toggle - Now showing monthly by default for these specific prices */}
-          <div className="flex items-center justify-center gap-4 mb-16">
-            <span className="text-sm font-medium text-white">Mensal</span>
-            <div className="w-14 h-7 bg-brand-deep rounded-full p-1 relative border border-brand-cyan/30">
-              <div className="w-5 h-5 bg-brand-cyan rounded-full shadow-cyan-glow" />
+          {/* Billing Toggle */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <div className="flex items-center gap-4">
+              <span className={`text-sm font-medium ${billingCycle === 'monthly' ? 'text-white' : 'text-gray-500'}`}>Mensal</span>
+              <button 
+                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
+                className="w-14 h-7 bg-brand-deep rounded-full p-1 relative border border-brand-cyan/30 transition-colors"
+                aria-label="Toggle billing cycle"
+              >
+                <motion.div 
+                  animate={{ x: billingCycle === 'monthly' ? 0 : 28 }}
+                  className="w-5 h-5 bg-brand-cyan rounded-full shadow-cyan-glow"
+                />
+              </button>
+              <span className={`text-sm font-medium ${billingCycle === 'annual' ? 'text-white' : 'text-gray-500'}`}>Anual</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-500">Anual</span>
-              <span className="bg-brand-cyan/20 text-brand-cyan text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand-cyan/30">
-                PROMOÇÃO ATIVA
-              </span>
-            </div>
+            <span className="bg-brand-cyan/20 text-brand-cyan text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand-cyan/30">
+              PAGUE 10, LEVE 12 MESES
+            </span>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 overflow-x-auto pb-4 md:pb-0">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 pb-4 md:pb-0">
             {/* Starter Plan */}
             <div className="min-w-[300px] p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
               <h3 className="text-2xl font-bold mb-1">Starter</h3>
               <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Microempreendedor</p>
-              <div className="text-4xl font-bold mb-8">R$ 29,90<span className="text-lg text-gray-500 font-normal">/mês</span></div>
+              <div className="text-4xl font-bold mb-2">
+                R$ {billingCycle === 'annual' ? '379,00' : '37,90'}
+                <span className="text-lg text-gray-500 font-normal">/{billingCycle === 'annual' ? 'ano' : 'mês'}</span>
+              </div>
+              {billingCycle === 'annual' && (
+                <p className="text-green-500 text-[10px] font-bold uppercase mb-6">Economize R$ 75,80</p>
+              )}
+              {billingCycle === 'monthly' && <div className="mb-6 h-4" />}
               
               <div className="space-y-4 mb-10 flex-1">
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
@@ -460,7 +518,7 @@ export default function LandingPage() {
               </div>
               
               <a 
-                href={getWAUrl("Olá! Gostaria de assinar o Plano Starter de R$ 29,90 da Sofia.")}
+                href={getWAUrl(`Olá! Gostaria de assinar o Plano Starter (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia.`)}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-4 border border-white/20 text-white rounded-xl font-bold hover:bg-white/5 transition-all text-center"
@@ -474,7 +532,14 @@ export default function LandingPage() {
               <div className="absolute top-4 right-4 bg-brand-cyan text-brand-bg px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Recomendado</div>
               <h3 className="text-2xl font-bold mb-1">Pro</h3>
               <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Pequenos Negócios</p>
-              <div className="text-4xl font-bold mb-8">R$ 147,00*<span className="text-lg text-gray-500 font-normal">/mês</span></div>
+              <div className="text-4xl font-bold mb-2">
+                R$ {billingCycle === 'annual' ? '1.679,00' : '167,90'}
+                <span className="text-lg text-gray-500 font-normal">/{billingCycle === 'annual' ? 'ano' : 'mês'}</span>
+              </div>
+              {billingCycle === 'annual' && (
+                <p className="text-green-500 text-[10px] font-bold uppercase mb-6">Economize R$ 335,80</p>
+              )}
+              {billingCycle === 'monthly' && <div className="mb-6 h-4" />}
               
               <div className="space-y-4 mb-10 flex-1">
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
@@ -493,7 +558,7 @@ export default function LandingPage() {
               </div>
               
               <a 
-                href={getWAUrl("Olá! Gostaria de assinar o Plano Pro de R$ 147,00 da Sofia.")}
+                href={getWAUrl(`Olá! Gostaria de assinar o Plano Pro (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia.`)}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-4 bg-brand-cyan text-brand-bg rounded-xl font-bold hover:brightness-110 transition-all text-center"
@@ -506,7 +571,14 @@ export default function LandingPage() {
             <div className="min-w-[300px] p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
               <h3 className="text-2xl font-bold mb-1">Elite</h3>
               <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Escala e Marketing</p>
-              <div className="text-4xl font-bold mb-8">R$ 297,00*<span className="text-lg text-gray-500 font-normal">/mês</span></div>
+              <div className="text-4xl font-bold mb-2">
+                R$ {billingCycle === 'annual' ? '3.279,00' : '327,90'}
+                <span className="text-lg text-gray-500 font-normal">/{billingCycle === 'annual' ? 'ano' : 'mês'}</span>
+              </div>
+              {billingCycle === 'annual' && (
+                <p className="text-green-500 text-[10px] font-bold uppercase mb-6">Economize R$ 655,80</p>
+              )}
+              {billingCycle === 'monthly' && <div className="mb-6 h-4" />}
               
               <div className="space-y-4 mb-10 flex-1">
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
@@ -525,7 +597,7 @@ export default function LandingPage() {
               </div>
               
               <a 
-                href={getWAUrl("Olá! Gostaria de assinar o Plano Elite de R$ 297,00 da Sofia.")}
+                href={getWAUrl(`Olá! Gostaria de assinar o Plano Elite (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia.`)}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-4 border border-brand-cyan text-brand-cyan rounded-xl font-bold hover:bg-brand-cyan/10 transition-all text-center"
@@ -569,17 +641,7 @@ export default function LandingPage() {
                 a: "Segurança é nossa prioridade. Estamos em total conformidade com a LGPD. Todas as conversas são criptografadas e os dados são usados exclusivamente para o treinamento da sua própria assistente, nunca compartilhados com terceiros."
               }
             ].map((faq, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-2xl bg-brand-bg border border-white/5 hover:border-brand-cyan/30 transition-all group"
-              >
-                <h3 className="text-lg font-bold mb-3 text-white group-hover:text-brand-cyan transition-colors">{faq.q}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{faq.a}</p>
-              </motion.div>
+              <FAQItem key={i} q={faq.q} a={faq.a} index={i} />
             ))}
           </div>
         </div>
