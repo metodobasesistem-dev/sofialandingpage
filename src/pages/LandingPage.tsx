@@ -91,7 +91,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold tracking-tighter text-white">Sofia</span>
+          <span className="text-2xl font-bold tracking-tighter text-white">Sofia Med</span>
           <div className="w-2 h-2 rounded-full bg-brand-cyan pulsing-dot" />
         </div>
 
@@ -107,7 +107,7 @@ const Navbar = () => {
             </a>
           ))}
           <a 
-            href={getWAUrl("Olá! Gostaria de saber mais sobre como a Sofia pode ajudar minha empresa.")}
+            href={getWAUrl("Olá! Gostaria de saber mais sobre como a Sofia Med pode ajudar minha clínica.")}
             target="_blank"
             rel="noreferrer"
             className="bg-brand-primary hover:bg-brand-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-transform hover:scale-105 shadow-cyan-glow border border-brand-cyan/30"
@@ -146,7 +146,7 @@ const Navbar = () => {
                 </a>
               ))}
               <a 
-                href={getWAUrl("Olá! Gostaria de começar agora com a Sofia.")}
+                href={getWAUrl("Olá! Gostaria de começar agora com a Sofia Med na minha clínica.")}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-brand-primary text-white px-6 py-3 rounded-full font-semibold glow-cyan"
@@ -163,10 +163,10 @@ const Navbar = () => {
 
 const WhatsAppMockup = () => {
   const messages = [
-    { text: "Oi! Gostaria de saber mais sobre o serviço de vocês.", isBot: false },
-    { text: "Olá! Sou a Sofia, a assistente digital. É um prazer atender você! Como posso ajudar hoje?", isBot: true },
-    { text: "Quais são os horários de atendimento?", isBot: false },
-    { text: "Nós atendemos 24 horas por dia, 7 dias por semana! Você nunca ficará sem resposta por aqui. 😊", isBot: true },
+    { text: "Oi! Gostaria de marcar uma consulta com o dermatologista.", isBot: false },
+    { text: "Olá! Sou a Sofia Med, a assistente digital da clínica. É um prazer atender você! Temos horários disponíveis para quarta-feira às 14h. Gostaria de agendar?", isBot: true },
+    { text: "Sim, pode ser nesse horário.", isBot: false },
+    { text: "Perfeito! Consulta agendada. Vou enviar os detalhes do preparo para o seu WhatsApp agora mesmo. 😊", isBot: true },
   ];
 
   return (
@@ -174,7 +174,7 @@ const WhatsAppMockup = () => {
       <div className="bg-[#1f2c34] p-4 flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-brand-primary flex items-center justify-center text-white font-bold">S</div>
         <div>
-          <p className="text-white text-sm font-semibold">Sofia - IA</p>
+          <p className="text-white text-sm font-semibold">Sofia Med - Clínica I.A.</p>
           <p className="text-brand-cyan text-[10px] flex items-center gap-1">
             <span className="w-1 h-1 rounded-full bg-brand-cyan" /> online
           </p>
@@ -263,19 +263,19 @@ export default function LandingPage() {
             className="text-center lg:text-left"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-gradient px-4 md:px-0">
-              A inteligência que seu WhatsApp precisa para vender 24h por dia.
+              A inteligência que sua clínica precisa para atender 24h por dia.
             </h1>
             <p className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed mx-auto lg:mx-0 px-6 md:px-0">
-              Sofia é sua nova funcionária digital. Ela aprende sobre seu negócio, atende com naturalidade e garante que nenhum lead fique sem resposta, 24h por dia.
+              Sofia Med é sua nova funcionária digital. Ela aprende sobre seus procedimentos, agenda consultas e garante que nenhum paciente fique sem resposta, 24h por dia.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start px-8 sm:px-0">
               <a 
-                href={getWAUrl("Olá! Quero a Sofia atendendo meus clientes 24h por dia e vendendo mais.")}
+                href={getWAUrl("Olá! Quero a Sofia Med atendendo meus pacientes 24h por dia e agendando consultas.")}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-purple-glow flex items-center justify-center gap-2 border border-brand-cyan/30"
               >
-                Começar agora <ArrowRight className="w-5 h-5" />
+                Cuidar dos meus pacientes <ArrowRight className="w-5 h-5" />
               </a>
               <a 
                 href="https://agenteia.natandesouza.com.br/assistente"
@@ -306,22 +306,22 @@ export default function LandingPage() {
 
       {/* 3. Problema Section */}
       <SectionWrapper className="text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-16">Você está perdendo clientes todos os dias sem perceber.</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-16">Sua clínica está perdendo pacientes todos os dias sem perceber.</h2>
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
-              title: "Atendimento Noturno",
-              text: "Um cliente manda mensagem às 22h, não recebe resposta e vai direto para o seu concorrente.",
+              title: "Agendamento Noturno",
+              text: "Um paciente tenta marcar consulta às 22h, não consegue e termina buscando outro especialista.",
               icon: <Clock className="w-10 h-10 text-brand-cyan" />
             },
             {
-              title: "Tarefas Repetitivas",
-              text: "Sua equipe passa o dia respondendo as mesmas perguntas simples, perdendo tempo produtivo.",
+              title: "Triagem Repetitiva",
+              text: "Sua secretária passa o dia respondendo dúvidas simples e confirmando horários, perdendo tempo produtivo.",
               icon: <MessageCircle className="w-10 h-10 text-brand-cyan" />
             },
             {
-              title: "Fim de Semana Perdido",
-              text: "Leads quentes chegam no sábado e ficam sem qualquer atendimento até a manhã de segunda-feira.",
+              title: "Urgências e Dúvidas",
+              text: "Pacientes chegam com dúvidas básicas no fim de semana e ficam sem suporte até a segunda-feira.",
               icon: <Zap className="w-10 h-10 text-brand-cyan" />
             }
           ].map((item, i) => (
@@ -357,16 +357,16 @@ export default function LandingPage() {
              </motion.div>
           </div>
           <div className="order-1 lg:order-2">
-            <h2 className="text-3xl md:text-5xl font-bold mb-8">Sofia não é um chatbot. É uma funcionária.</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-8">Sofia Med não é um chatbot. É uma funcionária da sua clínica.</h2>
             <div className="space-y-6 text-lg text-gray-300">
-              <p>Sofia aprende sobre o seu negócio através de um treinamento simples, assimilando seus produtos, serviços e o tom de voz da sua marca.</p>
-              <p>Ela fala com naturalidade, responde com inteligência, qualifica leads automaticamente e sabe exatamente o momento de passar o atendimento para um humano.</p>
+              <p>Sofia Med aprende sobre o seu consultório através de um treinamento simples, assimilando seus procedimentos, convênios aceitos e o tom de voz do seu atendimento.</p>
+              <p>Ela fala com naturalidade, responde com inteligência, realiza a triagem inicial e sabe exatamente o momento de passar o atendimento para sua recepção ou equipe médica.</p>
               <ul className="space-y-4 pt-4">
                 {[
-                  "Treinamento personalizado em minutos",
-                  "Linguagem natural e humana",
-                  "Qualificação de leads automática",
-                  "Transição inteligente para equipe real"
+                  "Treinamento médico personalizado em minutos",
+                  "Linguagem acolhedora e humana",
+                  "Triagem e pré-agendamento automático",
+                  "Transição inteligente para sua secretária"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-brand-cyan" /> {item}
@@ -382,12 +382,12 @@ export default function LandingPage() {
         <div className="grid md:grid-cols-4 gap-6 items-center">
           <div className="text-left col-span-1">
             <p className="text-brand-gold text-xs font-bold uppercase tracking-tighter mb-1">O Desafio</p>
-            <p className="text-sm font-medium">Você perde clientes todos os dias enquanto dorme.</p>
+            <p className="text-sm font-medium">Você perde pacientes todos os dias fora do horário comercial.</p>
           </div>
           {[
-            { title: "Manual", text: "Treine a Sofia com seu manual em minutos." },
-            { title: "WhatsApp", text: "Conecte ao seu WhatsApp comercial." },
-            { title: "Painel", text: "Acompanhe as vendas pelo painel." }
+            { title: "Manual", text: "Treine a Sofia Med com seus protocolos em minutos." },
+            { title: "WhatsApp", text: "Conecte ao WhatsApp da sua clínica." },
+            { title: "Painel", text: "Acompanhe os agendamentos pelo painel." }
           ].map((step, i) => (
             <div key={i} className="flex items-center gap-4 text-left">
               <span className="text-3xl font-black text-brand-cyan/20">0{i + 1}</span>
@@ -400,15 +400,15 @@ export default function LandingPage() {
       {/* 6. Benefícios */}
       <section id="beneficios" className="py-20 bg-brand-deep/40">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center">Tudo o que sua empresa precisa para crescer.</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center">Tudo o que sua clínica precisa para crescer.</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: <Clock />, title: "Atendimento 24 horas", desc: "Nunca apague as luzes. Sofia está sempre alerta." },
-              { icon: <Zap />, title: "Resposta em segundos", desc: "Velocidade que impressiona e converte na hora." },
-              { icon: <ShieldCheck />, title: "Nunca perde um lead", desc: "Cada mensagem é uma oportunidade aproveitada." },
-              { icon: <Brain />, title: "IA que Aprende", desc: "Quanto mais atende, mais inteligente ela fica." },
-              { icon: <MessageCircle />, title: "Áudio Natural", desc: "Responde em voz quando o contexto exige." },
-              { icon: <BarChart3 />, title: "Relatórios de Venda", desc: "Siba exatamente quanto a Sofia está gerando." }
+              { icon: <Clock />, title: "Agendamento 24h", desc: "Sua clínica aberta para marcações 24 horas por dia." },
+              { icon: <Zap />, title: "Confirmação Automática", desc: "Redução de faltas com lembretes inteligentes de consulta." },
+              { icon: <ShieldCheck />, title: "Conformidade LGPD", desc: "Segurança total nos dados sensíveis dos seus pacientes." },
+              { icon: <Brain />, title: "Triagem com I.A.", desc: "Identifica a queixa do paciente e agenda com o especialista certo." },
+              { icon: <MessageCircle />, title: "Falar via Áudio", desc: "Entende e responde áudios de pacientes idosos ou com pressa." },
+              { icon: <BarChart3 />, title: "Indicadores de Saúde", desc: "Relatórios de volume de atendimentos e taxa de conversão." }
             ].map((benefit, i) => (
               <div key={i} className="p-8 rounded-2xl bg-brand-bg/60 border border-white/5 hover:border-brand-cyan/40 transition-colors">
                 <div className="text-brand-cyan mb-6">{benefit.icon}</div>
@@ -422,25 +422,25 @@ export default function LandingPage() {
 
       {/* 7. Prova Social */}
       <SectionWrapper className="text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-16">Empresas que já têm a Sofia na equipe.</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-16">Clínicas que já têm a Sofia Med na equipe.</h2>
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
-              name: "Ricardo Mendes",
-              role: "CEO na Solar Tech",
-              text: "Desde que a Sofia assumiu nosso WhatsApp, nossas vendas aumentaram 40%. O lead não espera mais nem 10 segundos.",
+              name: "Dr. Ricardo Mendes",
+              role: "Dermatologista / Clínica SkinCare",
+              text: "Desde que a Sofia Med assumiu nosso WhatsApp, nossos agendamentos aumentaram 40%. O paciente não espera mais nem 10 segundos.",
               img: "https://i.pravatar.cc/150?u=a1"
             },
             {
-              name: "Juliana Costa",
-              role: "Dona da Boutique J",
-              text: "É impressionante como ela aprendeu sobre minhas roupas. Meus clientes acham que é uma pessoa real respondendo.",
+              name: "Dra. Juliana Costa",
+              role: "Ginecologista / Centro Médico J",
+              text: "É impressionante como ela aprendeu sobre os preparos dos exames. Minhas pacientes acham que é uma pessoa real e acolhedora respondendo.",
               img: "https://i.pravatar.cc/150?u=a2"
             },
             {
-              name: "André Silva",
-              role: "Gerente Imobiliária",
-              text: "A Sofia qualifica os interessados no domingo, e na segunda minha equipe só precisa fechar o contrato.",
+              name: "Dr. André Silva",
+              role: "Diretor da Clínica Sorriso",
+              text: "A Sofia Med faz a triagem inicial no domingo, e na segunda minha recepção só precisa confirmar o horário final no sistema.",
               img: "https://i.pravatar.cc/150?u=a3"
             }
           ].map((card, i) => (
@@ -464,7 +464,7 @@ export default function LandingPage() {
       {/* 8. Planos */}
       <section id="planos" className="py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-8">Escolha o plano ideal para o seu negócio.</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-8">Escolha o plano ideal para sua clínica ou consultório.</h2>
           
           {/* Billing Toggle */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -491,7 +491,7 @@ export default function LandingPage() {
             {/* Starter Plan */}
             <div className="min-w-[300px] p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
               <h3 className="text-2xl font-bold mb-1">Starter</h3>
-              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Microempreendedor</p>
+              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Consultório Individual</p>
               <div className="text-4xl font-bold mb-2">
                 R$ {billingCycle === 'annual' ? '379,00' : '37,90'}
                 <span className="text-lg text-gray-500 font-normal">/{billingCycle === 'annual' ? 'ano' : 'mês'}</span>
@@ -504,21 +504,21 @@ export default function LandingPage() {
               <div className="space-y-4 mb-10 flex-1">
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Dashboard & Relatórios</span></div>
-                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Contatos/CRM</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Pacientes</span></div>
                 <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Agentes de IA</span></div>
-                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Agendamentos/Calendário</span></div>
-                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Campanhas/Broadcast</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Agenda Integrada</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Lembretes Automáticos</span></div>
                 <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Modelos Avançados (o1)</span></div>
                 <div className="pt-2 border-t border-white/5">
                   <div className="flex items-center gap-3 text-sm font-medium text-gray-500">
                     <X className="w-4 h-4 text-red-500/50" /> 
-                    <span>IA Sofia <span className="text-[10px] bg-white/5 px-1.5 py-0.5 rounded ml-1 text-gray-400">15 dias teste</span></span>
+                    <span>IA Sofia Med <span className="text-[10px] bg-white/5 px-1.5 py-0.5 rounded ml-1 text-gray-400">15 dias teste</span></span>
                   </div>
                 </div>
               </div>
               
               <a 
-                href={getWAUrl(`Olá! Gostaria de assinar o Plano Starter (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia.`)}
+                href={getWAUrl(`Olá! Gostaria de assinar o Plano Starter (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia Med.`)}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-4 border border-white/20 text-white rounded-xl font-bold hover:bg-white/5 transition-all text-center"
@@ -531,7 +531,7 @@ export default function LandingPage() {
             <div className="min-w-[300px] p-8 rounded-3xl border-2 border-brand-cyan/30 bg-brand-primary/5 text-left flex flex-col relative transition-all hover:scale-[1.02] shadow-cyan-glow">
               <div className="absolute top-4 right-4 bg-brand-cyan text-brand-bg px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Recomendado</div>
               <h3 className="text-2xl font-bold mb-1">Pro</h3>
-              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Pequenos Negócios</p>
+              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Pequenas Clínicas</p>
               <div className="text-4xl font-bold mb-2">
                 R$ {billingCycle === 'annual' ? '1.679,00' : '167,90'}
                 <span className="text-lg text-gray-500 font-normal">/{billingCycle === 'annual' ? 'ano' : 'mês'}</span>
@@ -544,21 +544,21 @@ export default function LandingPage() {
               <div className="space-y-4 mb-10 flex-1">
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Dashboard & Relatórios</span></div>
-                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Contatos/CRM</span></div>
-                <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Até 3 Agentes de IA</span></div>
-                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Agendamentos/Calendário</span></div>
-                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Campanhas/Broadcast</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Pacientes</span></div>
+                <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Até 3 Agentes Médicos</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Agenda Integrada</span></div>
+                <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Follow-up de Pacientes</span></div>
                 <div className="flex items-center gap-3 text-sm"><X className="w-4 h-4 text-red-500/50" /> <span className="text-gray-500">Modelos Avançados (o1)</span></div>
                 <div className="pt-2 border-t border-brand-cyan/20">
                   <div className="flex items-center gap-3 text-sm font-medium text-gray-500">
                     <X className="w-4 h-4 text-red-500/50" /> 
-                    <span>IA Sofia <span className="text-[10px] bg-white/5 px-1.5 py-0.5 rounded ml-1 text-gray-400">15 dias teste</span></span>
+                    <span>IA Sofia Med <span className="text-[10px] bg-white/5 px-1.5 py-0.5 rounded ml-1 text-gray-400">15 dias teste</span></span>
                   </div>
                 </div>
               </div>
               
               <a 
-                href={getWAUrl(`Olá! Gostaria de assinar o Plano Pro (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia.`)}
+                href={getWAUrl(`Olá! Gostaria de assinar o Plano Pro (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia Med.`)}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-4 bg-brand-cyan text-brand-bg rounded-xl font-bold hover:brightness-110 transition-all text-center"
@@ -570,7 +570,7 @@ export default function LandingPage() {
             {/* Elite Plan */}
             <div className="min-w-[300px] p-8 rounded-3xl border border-white/10 bg-brand-deep/20 text-left flex flex-col hover:border-white/20 transition-all">
               <h3 className="text-2xl font-bold mb-1">Elite</h3>
-              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Escala e Marketing</p>
+              <p className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-4">Centros Médicos e Rede</p>
               <div className="text-4xl font-bold mb-2">
                 R$ {billingCycle === 'annual' ? '3.279,00' : '327,90'}
                 <span className="text-lg text-gray-500 font-normal">/{billingCycle === 'annual' ? 'ano' : 'mês'}</span>
@@ -583,21 +583,21 @@ export default function LandingPage() {
               <div className="space-y-4 mb-10 flex-1">
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Inbox (Chat Manual)</span></div>
                 <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Dashboard & Relatórios</span></div>
-                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Contatos/CRM</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Gestão de Pacientes</span></div>
                 <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Agentes Ilimitados</span></div>
-                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Agendamentos/Calendário</span></div>
-                <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Campanhas/Broadcast</span></div>
+                <div className="flex items-center gap-3 text-sm"><Check className="w-4 h-4 text-green-500" /> <span>Agenda Integrada</span></div>
+                <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Follow-up de Pacientes</span></div>
                 <div className="flex items-center gap-3 text-sm font-bold text-white"><Check className="w-4 h-4 text-green-500" /> <span>Modelos Avançados (o1)</span></div>
                 <div className="pt-2 border-t border-white/5">
                   <div className="flex items-center gap-3 text-sm font-black text-white">
                     <Check className="w-4 h-4 text-green-500" /> 
-                    <span>IA Sofia: <span className="text-brand-cyan">Total + Automação</span></span>
+                    <span>IA Sofia Med: <span className="text-brand-cyan">Total + Automação</span></span>
                   </div>
                 </div>
               </div>
               
               <a 
-                href={getWAUrl(`Olá! Gostaria de assinar o Plano Elite (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia.`)}
+                href={getWAUrl(`Olá! Gostaria de assinar o Plano Elite (${billingCycle === 'annual' ? 'Anual' : 'Mensal'}) da Sofia Med.`)}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-4 border border-brand-cyan text-brand-cyan rounded-xl font-bold hover:bg-brand-cyan/10 transition-all text-center"
@@ -617,28 +617,28 @@ export default function LandingPage() {
           <div className="space-y-4">
             {[
               {
-                q: "Como a Sofia aprende sobre o meu negócio?",
-                a: "É muito simples! Você fornece manuais, links do seu site ou documentos com informações sobre seus produtos e serviços. A Sofia processa esses dados e começa a responder exatamente como você faria, mantendo o tom de voz da sua marca."
+                q: "Como a Sofia Med aprende sobre os protocolos da minha clínica?",
+                a: "É muito simples! Você fornece manuais de atendimento, convênios aceitos, lista de procedimentos e horários. A Sofia Med processa esses dados e começa a responder exatamente como sua equipe faria, mantendo um tom ético e acolhedor."
               },
               {
-                q: "Ela consegue responder mensagens de áudio?",
-                a: "Sim! No Plano Profissional, a Sofia não apenas entende áudios enviados pelos clientes, mas também pode responder com áudios gerados por IA, tornando o atendimento ainda mais humano e acessível."
+                q: "Ela consegue fazer triagem de especialidades?",
+                a: "Sim! A Sofia Med pode ser treinada para entender a queixa do paciente e sugerir a especialidade correta ou informar sobre a necessidade de exames específicos antes da consulta."
               },
               {
-                q: "Preciso deixar meu celular ligado 24h?",
-                a: "Não. A Sofia funciona de forma independente em nossos servidores. Uma vez conectada ao seu WhatsApp Business, ela opera 24h por dia, 7 dias por semana, mesmo que seu celular esteja desligado ou sem internet."
+                q: "Os dados dos pacientes estão seguros?",
+                a: "Com certeza. Segurança e privacidade são pilares da Sofia Med. Trabalhamos em conformidade absoluta com a LGPD para garantir que informações sensíveis de saúde nunca sejam expostas ou compartilhadas com terceiros."
               },
               {
-                q: "A Sofia pode agendar reuniões ou consultas?",
-                a: "Com certeza. Ela se integra com sistemas de calendário e pode verificar sua disponibilidade em tempo real para agendar reuniões, consultas ou visitas, enviando a confirmação direto para o cliente."
+                q: "Como ela se integra com o meu sistema de agenda?",
+                a: "A Sofia Med pode ser integrada via API com os principais softwares de gestão médica do mercado, verificando disponibilidade em tempo real e inserindo os agendamentos diretamente no seu sistema."
               },
               {
-                q: "O que acontece se ela não souber responder algo?",
-                a: "Nesses casos, a Sofia é preparada para ser honesta e oferecer passar o atendimento para um atendente humano. Você recebe uma notificação e pode assumir a conversa pelo painel a qualquer momento."
+                q: "Ela pode enviar lembretes de consulta?",
+                a: "Sim. Um dos maiores benefícios é o envio automático de lembretes e a coleta de confirmação. Se o paciente desmarcar, a Sofia Med já oferece o horário vago para outro paciente da fila de espera."
               },
               {
-                q: "É seguro? Meus dados e dos meus clientes estarão protegidos?",
-                a: "Segurança é nossa prioridade. Estamos em total conformidade com a LGPD. Todas as conversas são criptografadas e os dados são usados exclusivamente para o treinamento da sua própria assistente, nunca compartilhados com terceiros."
+                q: "O que acontece se um paciente tiver uma emergência?",
+                a: "A Sofia Med é treinada para identificar palavras-chave de urgência. Nesses casos, ela fornece instruções imediatas de primeiros socorros ou orienta o paciente a buscar o pronto-atendimento mais próximo, transferindo o chat para sua equipe humana urgentemente."
               }
             ].map((faq, i) => (
               <FAQItem key={i} q={faq.q} a={faq.a} index={i} />
@@ -653,10 +653,10 @@ export default function LandingPage() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl" />
           
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 relative z-10 leading-tight px-2">Pronto para ter a Sofia na sua equipe?</h2>
-          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto relative z-10 px-4">Configure em menos de 15 minutos e comece a atender seus clientes hoje mesmo.</p>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 relative z-10 leading-tight px-2">Pronto para ter a Sofia Med na sua clínica?</h2>
+          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto relative z-10 px-4">Configure em menos de 15 minutos e comece a atender seus pacientes com excelência hoje mesmo.</p>
           <motion.a 
-            href={getWAUrl("Olá! Quero começar agora com a Sofia e vender mais pelo WhatsApp!")}
+            href={getWAUrl("Olá! Quero começar agora com a Sofia Med e otimizar os agendamentos da minha clínica!")}
             target="_blank"
             rel="noreferrer"
             whileHover={{ scale: 1.05 }}
@@ -673,16 +673,16 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-2">
-              <span className="text-3xl font-bold text-white">Sofia</span>
+              <span className="text-3xl font-bold text-white">Sofia Med</span>
               <div className="w-2 h-2 rounded-full bg-brand-cyan pulsing-dot" />
             </div>
-            <p className="text-gray-500 max-w-xs">Inteligência artificial aplicada ao atendimento que gera resultados reais.</p>
+            <p className="text-gray-500 max-w-xs">Inteligência artificial aplicada ao atendimento em saúde que gera resultados reais.</p>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-20">
             {[
               { title: "Empresa", links: [{name: "Sobre", href: "#sobre"}] },
-              { title: "Suporte", links: [{name: "Ajuda", href: "#"}, {name: "WhatsApp", href: getWAUrl("Olá! Preciso de ajuda com a Sofia.")}] },
+              { title: "Suporte", links: [{name: "Ajuda", href: "#"}, {name: "WhatsApp", href: getWAUrl("Olá! Preciso de ajuda com a Sofia Med.")}] },
               { title: "Legal", links: [{name: "Privacidade", href: "/privacidade"}, {name: "Termos", href: "/termos-de-uso"}, {name: "LGPD", href: "/lgpd"}] }
             ].map((col, i) => (
               <div key={i}>
@@ -703,7 +703,7 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
-          <p>© 2026 Sofia AI. Todos os direitos reservados.</p>
+          <p>© 2026 Sofia Med AI. Todos os direitos reservados.</p>
           <div className="flex gap-6">
             <span>contato@zyreo.com.br</span>
             <span>Criado por Zyreo</span>

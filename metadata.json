@@ -1,6 +1,8 @@
 {
-  "name": "Sofia - Funcionária Digital",
-  "description": "Uma funcionária digital com IA que atende seus clientes no WhatsApp 24h por dia, aprende sobre seu negócio e nunca perde um lead.",
+  "name": "Sofia Med - Funcionária Digital",
+  "description": "Uma funcionária digital com IA focada em clínicas médicas que atende seus pacientes no WhatsApp 24h por dia, agendando consultas e garantindo um atendimento humano.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
