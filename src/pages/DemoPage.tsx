@@ -176,9 +176,11 @@ export default function DemoPage() {
     specialty: "",
     phone: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
     // Construct pre-filled message with lead info
     const message = `Olá! Acabei de preencher a solicitação de demonstração gratuita de 30 dias no site da Sofia Med.\n\n` +
@@ -189,7 +191,20 @@ export default function DemoPage() {
       `• *WhatsApp:* ${formData.phone || 'Não informado'}\n\n` +
       `Gostaria de agendar a minha demonstração gratuita de 30 dias da Sofia Med!`;
     
-    window.open(getWAUrl(message), "_blank");
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+    } catch (err) {
+      console.error("Erro ao registrar lead no Google Sheets:", err);
+    } finally {
+      setIsSubmitting(false);
+      window.open(getWAUrl(message), "_blank");
+    }
   };
 
   return (
@@ -341,9 +356,10 @@ export default function DemoPage() {
 
                   <button 
                     type="submit"
-                    className="w-full py-4 mt-6 bg-brand-cyan text-brand-bg rounded-xl font-black text-center uppercase tracking-wide hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-cyan-glow"
+                    disabled={isSubmitting}
+                    className="w-full py-4 mt-6 bg-brand-cyan text-brand-bg rounded-xl font-black text-center uppercase tracking-wide hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-cyan-glow"
                   >
-                    Iniciar Demonstração 30 dias grátis <ArrowRight className="w-4 h-4" />
+                    {isSubmitting ? "Registrando Informações..." : "Iniciar Demonstração 30 dias grátis"} <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
 
@@ -497,7 +513,10 @@ export default function DemoPage() {
             <div className="w-1.5 h-1.5 rounded-full bg-brand-cyan pulsing-dot" />
           </div>
           <p>© 2026 Sofia Med AI. Todos os direitos reservados. Focado na ética médica e na agilidade clínica.</p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4 items-center">
+            <a href="/api/admin/auth" className="text-xs bg-brand-cyan/10 hover:bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all">
+              <Sparkles className="w-3.5 h-3.5" /> Conectar Google Sheets (Admin)
+            </a>
             <Link to="/" className="hover:text-white transition-colors">Voltar ao Início</Link>
             <Link to="/privacidade" className="hover:text-white transition-colors">Privacidade</Link>
           </div>
