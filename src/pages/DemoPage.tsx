@@ -285,9 +285,9 @@ export default function DemoPage() {
 
             <div className="flex items-center gap-4 justify-center lg:justify-start">
               <div className="flex -space-x-3">
-                <img className="w-9 h-9 rounded-full border-2 border-white relative z-30" src="https://i.pravatar.cc/100?u=doc1" alt="Feedback Doctor" />
-                <img className="w-9 h-9 rounded-full border-2 border-white relative z-20" src="https://i.pravatar.cc/100?u=doc2" alt="Feedback Doctor" />
-                <img className="w-9 h-9 rounded-full border-2 border-white relative z-10" src="https://i.pravatar.cc/100?u=doc3" alt="Feedback Doctor" />
+                <img className="w-9 h-9 rounded-full border-2 border-white relative z-30" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&h=100&q=80" alt="Feedback Doctor" />
+                <img className="w-9 h-9 rounded-full border-2 border-white relative z-20" src="https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=100&h=100&q=80" alt="Feedback Doctor" />
+                <img className="w-9 h-9 rounded-full border-2 border-white relative z-10" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=100&h=100&q=80" alt="Feedback Doctor" />
               </div>
               <div className="text-left text-xs text-slate-400 font-medium">
                 <div className="flex text-amber-500 mb-0.5">

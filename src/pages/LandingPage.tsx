@@ -437,19 +437,19 @@ export default function LandingPage() {
               name: "Dr. Ricardo Mendes",
               role: "Dermatologista / Clínica SkinCare",
               text: "Desde que a Sofia Med assumiu nosso WhatsApp, nossos agendamentos aumentaram 40%. O paciente não espera mais nem 10 segundos.",
-              img: "https://i.pravatar.cc/150?u=a1"
+              img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=256&h=256&q=80"
             },
             {
               name: "Dra. Juliana Costa",
               role: "Ginecologista / Centro Médico J",
               text: "É impressionante como ela aprendeu sobre os preparos dos exames. Minhas pacientes acham que é uma pessoa real e acolhedora respondendo.",
-              img: "https://i.pravatar.cc/150?u=a2"
+              img: "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=256&h=256&q=80"
             },
             {
               name: "Dr. André Silva",
               role: "Diretor da Clínica Sorriso",
               text: "A Sofia Med faz a triagem inicial no domingo, e na segunda minha recepção só precisa confirmar o horário final no sistema.",
-              img: "https://i.pravatar.cc/150?u=a3"
+              img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=256&h=256&q=80"
             }
           ].map((card, i) => (
             <div key={i} className="bg-white p-8 rounded-2xl border border-slate-100 shadow-lg shadow-slate-100/50 text-left">
