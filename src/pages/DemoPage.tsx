@@ -178,33 +178,31 @@ export default function DemoPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Construct pre-filled message with lead info
-    const message = `Olá! Acabei de preencher a solicitação de demonstração gratuita de 30 dias no site da Sofia Med.\n\n` +
-      `🩺 *DADOS DA SOLICITAÇÃO:*\n` +
-      `• *Nome:* ${formData.name || 'Não informado'}\n` +
-      `• *Clínica:* ${formData.clinic || 'Não informado'}\n` +
-      `• *Especialidade:* ${formData.specialty || 'Não informado'}\n` +
-      `• *WhatsApp:* ${formData.phone || 'Não informado'}\n\n` +
-      `Gostaria de agendar a minha demonstração gratuita de 30 dias da Sofia Med!`;
+    setSubmitError(null);
     
     try {
-      await fetch("/api/leads", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(formData)
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || errorData.error || "Ocorreu um erro no servidor ao registrar o lead.");
+      }
+      
       setIsSubmitted(true);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Erro ao registrar lead no Google Sheets:", err);
-      // Even if sheets fetch fails visually, mark as submitted so they see the success view
-      setIsSubmitted(true);
+      setSubmitError(err.message || "Erro de conexão com o servidor. Por favor, tente novamente ou use o WhatsApp abaixo.");
     } finally {
       setIsSubmitting(false);
     }
@@ -212,11 +210,13 @@ export default function DemoPage() {
 
   // Helper helper to open WhatsApp manually if needed
   const handleOpenWA = () => {
-    const message = `Olá! Acabei de me cadastrar para os 30 dias grátis da Sofia Med.\n\n` +
-      `🩺 *DADOS:*\n` +
-      `• *Nome:* ${formData.name}\n` +
-      `• *Clínica:* ${formData.clinic}\n` +
-      `Gostaria de agendar minha apresentação!`;
+    const message = `Olá! Gostaria de agendar minha demonstração gratuita de 30 dias da Sofia Med.\n\n` +
+      `🩺 *DADOS DA SOLICITAÇÃO:*\n` +
+      `• *Nome:* ${formData.name || 'Não informado'}\n` +
+      `• *Clínica:* ${formData.clinic || 'Não informado'}\n` +
+      `• *Especialidade:* ${formData.specialty || 'Não informado'}\n` +
+      `• *WhatsApp:* ${formData.phone || 'Não informado'}\n\n` +
+      `Gostaria de iniciar meus testes!`;
     window.open(getWAUrl(message), "_blank");
   };
 
@@ -374,6 +374,21 @@ export default function DemoPage() {
                           className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
                         />
                       </div>
+
+                      {submitError && (
+                        <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs rounded-xl p-4 mt-4 leading-relaxed">
+                          <p className="font-bold mb-1">Ops! Ocorreu um problema ao enviar os dados:</p>
+                          <p className="opacity-90 mb-3">{submitError}</p>
+                          <p className="mb-3">Para não perder sua demonstração, você pode nos chamar diretamente no WhatsApp com seus dados pré-preenchidos:</p>
+                          <button
+                            type="button"
+                            onClick={handleOpenWA}
+                            className="w-full py-2.5 bg-[#25D366] text-slate-900 font-extrabold rounded-lg hover:brightness-110 transition-all flex items-center justify-center gap-1.5 text-xs uppercase"
+                          >
+                            <MessageCircle className="w-4 h-4 fill-current" /> Enviar via WhatsApp
+                          </button>
+                        </div>
+                      )}
 
                       <button 
                         type="submit"
