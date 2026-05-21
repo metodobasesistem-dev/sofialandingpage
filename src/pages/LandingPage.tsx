@@ -443,7 +443,7 @@ export default function LandingPage() {
               name: "Dra. Juliana Costa",
               role: "Ginecologista / Centro Médico J",
               text: "É impressionante como ela aprendeu sobre os preparos dos exames. Minhas pacientes acham que é uma pessoa real e acolhedora respondendo.",
-              img: "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=256&h=256&q=80"
+              img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=256&h=256&q=80"
             },
             {
               name: "Dr. André Silva",
