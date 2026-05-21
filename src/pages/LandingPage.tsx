@@ -277,14 +277,12 @@ export default function LandingPage() {
               >
                 Cuidar dos meus pacientes <ArrowRight className="w-5 h-5" />
               </a>
-              <a 
-                href="https://agenteia.natandesouza.com.br/assistente"
-                target="_blank"
-                rel="noreferrer"
-                className="border border-brand-cyan text-brand-cyan hover:bg-brand-cyan/10 px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center"
+              <Link 
+                to="/demonstracao"
+                className="border border-brand-cyan text-brand-cyan hover:bg-brand-cyan/10 px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center text-center"
               >
-                Ver como funciona
-              </a>
+                Demonstração Gratuita 30 dias
+              </Link>
             </div>
           </motion.div>
 
