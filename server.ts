@@ -72,17 +72,15 @@ async function appendLeadToSheet(lead: { name: string; clinic: string; specialty
 
   const values = [
     [
-      dateStr,
       lead.name,
       lead.clinic,
       lead.specialty,
-      lead.phone,
-      "Novo Lead (Demonstração 30 dias)"
+      lead.phone
     ]
   ];
 
-  // Append values to 'A:Z' (first sheet default grid scope)
-  const range = "A:F";
+  // Append values to 'A:D'
+  const range = "A:D";
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(range)}:append?valueInputOption=USER_ENTERED`;
 
   const response = await fetch(url, {

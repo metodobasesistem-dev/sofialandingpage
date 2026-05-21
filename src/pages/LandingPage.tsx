@@ -273,13 +273,13 @@ export default function LandingPage() {
                 href={getWAUrl("Olá! Quero a Sofia Med atendendo meus pacientes 24h por dia e agendando consultas.")}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-purple-glow flex items-center justify-center gap-2 border border-brand-cyan/30"
+                className="bg-brand-primary hover:bg-brand-primary/90 text-white px-6 sm:px-8 py-4 rounded-xl font-bold text-sm sm:text-base lg:text-lg transition-all shadow-purple-glow flex items-center justify-center gap-2 border border-brand-cyan/30 whitespace-nowrap"
               >
-                Cuidar dos meus pacientes <ArrowRight className="w-5 h-5" />
+                Cuidar dos meus pacientes <ArrowRight className="w-5 h-5 shrink-0" />
               </a>
               <Link 
                 to="/demonstracao"
-                className="border border-brand-cyan text-brand-cyan hover:bg-brand-cyan/10 px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center justify-center text-center"
+                className="border border-brand-cyan text-brand-cyan hover:bg-brand-cyan/10 px-6 sm:px-8 py-4 rounded-xl font-bold text-sm sm:text-base lg:text-lg transition-all flex items-center justify-center text-center whitespace-nowrap"
               >
                 Demonstração Gratuita 30 dias
               </Link>
