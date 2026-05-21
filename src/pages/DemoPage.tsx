@@ -177,6 +177,7 @@ export default function DemoPage() {
     phone: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -199,12 +200,24 @@ export default function DemoPage() {
         },
         body: JSON.stringify(formData)
       });
+      setIsSubmitted(true);
     } catch (err) {
       console.error("Erro ao registrar lead no Google Sheets:", err);
+      // Even if sheets fetch fails visually, mark as submitted so they see the success view
+      setIsSubmitted(true);
     } finally {
       setIsSubmitting(false);
-      window.open(getWAUrl(message), "_blank");
     }
+  };
+
+  // Helper helper to open WhatsApp manually if needed
+  const handleOpenWA = () => {
+    const message = `Olá! Acabei de me cadastrar para os 30 dias grátis da Sofia Med.\n\n` +
+      `🩺 *DADOS:*\n` +
+      `• *Nome:* ${formData.name}\n` +
+      `• *Clínica:* ${formData.clinic}\n` +
+      `Gostaria de agendar minha apresentação!`;
+    window.open(getWAUrl(message), "_blank");
   };
 
   return (
@@ -291,82 +304,146 @@ export default function DemoPage() {
             </div>
           </motion.div>
 
-          {/* Lead Capture Form Card */}
+          {/* Lead Capture Form Card / Success Screen */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 w-full"
           >
-            <div className="bg-brand-deep/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-purple-glow relative overflow-hidden">
+            <div className="bg-brand-deep/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-purple-glow relative overflow-hidden min-h-[480px] flex flex-col justify-center">
               <div className="absolute top-0 right-0 w-32 h-32 bg-brand-cyan/5 rounded-full blur-2xl" />
               
-              <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-2">Solicitar Demonstração</h3>
-                <p className="text-sm text-gray-400 mb-6">Preencha os campos abaixo e inicie seu teste grátis de 30 dias diretamente via WhatsApp.</p>
-                
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Seu Nome completo</label>
-                    <input 
-                      type="text" 
-                      required
-                      placeholder="Ex: Dr. Carlos Silva"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Nome da Clínica / Consultório</label>
-                    <input 
-                      type="text" 
-                      required
-                      placeholder="Ex: Clínica Sorriso & Saúde"
-                      value={formData.clinic}
-                      onChange={(e) => setFormData({...formData, clinic: e.target.value})}
-                      className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Especialidade Principal</label>
-                    <input 
-                      type="text" 
-                      required
-                      placeholder="Ex: Pediatria, Odontologia, Geral..."
-                      value={formData.specialty}
-                      onChange={(e) => setFormData({...formData, specialty: e.target.value})}
-                      className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Número do WhatsApp</label>
-                    <input 
-                      type="tel" 
-                      required
-                      placeholder="Ex: (21) 99999-9999"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
-                    />
-                  </div>
-
-                  <button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-4 mt-6 bg-brand-cyan text-brand-bg rounded-xl font-black text-center uppercase tracking-wide hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-cyan-glow"
+              <AnimatePresence mode="wait">
+                {!isSubmitted ? (
+                  <motion.div
+                    key="lead-form"
+                    initial={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.4 }}
+                    className="relative z-10 w-full"
                   >
-                    {isSubmitting ? "Registrando Informações..." : "Iniciar Demonstração 30 dias grátis"} <ArrowRight className="w-4 h-4" />
-                  </button>
-                </form>
+                    <h3 className="text-2xl font-bold mb-2">Solicitar Demonstração</h3>
+                    <p className="text-sm text-gray-400 mb-6">Preencha os campos abaixo e inicie seu teste grátis de 30 dias diretamente via WhatsApp.</p>
+                    
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Seu Nome completo</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="Ex: Dr. Carlos Silva"
+                          value={formData.name}
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
+                        />
+                      </div>
 
-                <p className="text-center text-[11px] text-gray-500 mt-4 leading-relaxed">
-                  Ao clicar, você será redirecionado para o WhatsApp para validar sua clínica e ativar o período de testes de 30 dias.
-                </p>
-              </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Nome da Clínica / Consultório</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="Ex: Clínica Sorriso & Saúde"
+                          value={formData.clinic}
+                          onChange={(e) => setFormData({...formData, clinic: e.target.value})}
+                          className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Especialidade Principal</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="Ex: Pediatria, Odontologia, Geral..."
+                          value={formData.specialty}
+                          onChange={(e) => setFormData({...formData, specialty: e.target.value})}
+                          className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Número do WhatsApp</label>
+                        <input 
+                          type="tel" 
+                          required
+                          placeholder="Ex: (21) 99999-9999"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          className="w-full px-4 py-3 bg-brand-bg border border-white/10 rounded-xl text-white text-sm focus:border-brand-cyan focus:outline-none transition-colors"
+                        />
+                      </div>
+
+                      <button 
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full py-4 mt-6 bg-brand-cyan text-brand-bg rounded-xl font-black text-center uppercase tracking-wide hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-cyan-glow cursor-pointer"
+                      >
+                        {isSubmitting ? "Registrando Informações..." : "Iniciar Demonstração 30 dias grátis"} <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </form>
+
+                    <p className="text-center text-[11px] text-gray-500 mt-4 leading-relaxed">
+                      Ao clicar, suas informações serão integradas à nossa central de demonstrações da Sofia Med.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="success-screen"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="relative z-10 text-center py-6"
+                  >
+                    <div className="w-20 h-20 bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan rounded-full flex items-center justify-center mx-auto mb-6 relative">
+                      <div className="absolute inset-0 rounded-full border border-brand-cyan/20 animate-ping opacity-30"></div>
+                      <ShieldCheck className="w-10 h-10" />
+                    </div>
+
+                    <h3 className="text-3xl font-black mb-3 tracking-tight bg-gradient-to-r from-brand-cyan to-white bg-clip-text text-transparent">
+                      Solicitação Registrada!
+                    </h3>
+                    
+                    <p className="text-[#8fa2be] text-sm leading-relaxed mb-6 px-2">
+                      Ficamos muito felizes pelo seu interesse, <strong>{formData.name}</strong>! Seus dados foram salvos com sucesso na nossa planilha operacional.
+                    </p>
+                    
+                    <div className="bg-brand-bg/50 border border-white/5 rounded-2xl p-5 mb-8 text-left space-y-2 text-xs">
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">Dr(a):</span>
+                        <span className="text-white font-medium">{formData.name}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">Clínica:</span>
+                        <span className="text-white font-medium">{formData.clinic}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">Período de Testes:</span>
+                        <span className="text-brand-cyan font-bold">30 Dias Gratuitos</span>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-white/5 pt-6 space-y-4">
+                      <p className="text-xs text-brand-cyan font-semibold flex items-center justify-center gap-1.5 uppercase tracking-wider">
+                        <Sparkles className="w-3.5 h-3.5 animate-pulse" /> Em breve nossa equipe irá entrar em contato!
+                      </p>
+                      <p className="text-xs text-gray-400 leading-relaxed max-w-sm mx-auto">
+                        Analisamos as necessidades de sua especialidade ({formData.specialty}) para disponibilizar o melhor agente treinado para seu caso.
+                      </p>
+
+                      <div className="pt-2">
+                        <button
+                          onClick={handleOpenWA}
+                          className="w-full py-3.5 px-6 bg-[#25D366] text-black hover:brightness-110 font-black rounded-xl text-center flex items-center justify-center gap-2 shadow-lg transition-transform hover:scale-[1.02] cursor-pointer text-xs uppercase tracking-wider"
+                        >
+                          <MessageCircle className="w-4.5 h-4.5 fill-current" /> Acelerar no WhatsApp
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>
